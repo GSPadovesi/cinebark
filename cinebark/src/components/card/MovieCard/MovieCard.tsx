@@ -1,6 +1,6 @@
 import type { CardProps } from '@/types'
 import { forwardRef } from 'react'
-import { formatDuration, formatGenreLabel, formatRating } from '@/utils'
+import { formatDuration, formatGenreLabel, formatMinimumAge } from '@/utils'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
@@ -8,6 +8,7 @@ import MuiCard from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import * as S from './MovieCard.styles'
+
 
 export const MovieCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
   (
@@ -22,7 +23,6 @@ export const MovieCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
       genres,
       minimumAge,
       posterUrl,
-      rating,
       title,
       ...props
     },
@@ -30,8 +30,8 @@ export const MovieCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
   ) => {
     const imageUrl = posterUrl || backgroundImage
     const durationLabel = typeof duration === 'number' ? formatDuration(duration) : duration || formatDuration(durationInMinutos)
-    const ratingLabel = formatRating(rating ?? minimumAge)
     const genreLabel = formatGenreLabel(genres, genre)
+    const minimumAgeLabel = formatMinimumAge(minimumAge)
 
     return (
       <MuiCard
@@ -43,9 +43,9 @@ export const MovieCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
         ]}
       >
         <Box sx={S.posterSx(imageUrl)}>
-          {ratingLabel && (
+          {minimumAgeLabel && (
             <Chip
-              label={ratingLabel}
+              label={minimumAgeLabel}
               size="small"
               sx={S.ratingChipSx}
             />

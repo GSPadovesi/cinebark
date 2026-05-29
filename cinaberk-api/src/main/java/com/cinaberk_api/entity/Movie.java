@@ -75,7 +75,7 @@ public class Movie {
             throw new IllegalArgumentException("Link da imagem inválida");
         }
 
-        if(availableAt == null || availableAt.isBefore(LocalDateTime.now())){
+        if(availableAt == null){
             throw new IllegalArgumentException("Data de disponibilidade inválida");
         }
 
@@ -181,9 +181,6 @@ public class Movie {
         }
 
         if(availableAt != null){
-            if(availableAt.isBefore(LocalDateTime.now())){
-                throw new IllegalArgumentException("Data de disponibilidade invalida");
-            }
             this.availableAt = availableAt;
         }
 

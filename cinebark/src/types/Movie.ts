@@ -30,7 +30,7 @@ export type Movie = {
   genres: GenreType[]
   durationInMinutos: number
   minimumAge: number
-  posterUrl: string
+  posterURL: string
   availableAt: string
   active: boolean
   createdAt: string
@@ -44,7 +44,7 @@ export type MoviePayload = {
   genres: GenreType[]
   durationInMinutos: number
   minimumAge: number
-  posterUrl: string
+  posterURL: string
   availableAt: string
   active: boolean
 }

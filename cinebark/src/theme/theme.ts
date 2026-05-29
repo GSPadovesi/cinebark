@@ -57,7 +57,7 @@ export const theme = createTheme({
     },
 
     body1: {
-      color: '#94a3b8',
+      color: '#fff',
       fontSize: 16,
       lineHeight: 1.7,
     },

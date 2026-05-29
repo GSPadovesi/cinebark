@@ -38,5 +38,6 @@ export const MoviesGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 10px;
   padding: 10px;
+  scroll-margin-top: 96px;
 `;
 

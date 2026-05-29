@@ -1,11 +1,12 @@
 import { Box, Typography } from '@mui/material'
 import { heroImage, film, film2 } from '@/assets'
 import { Button, Card, FeaturedSlider, Input } from '@/components'
+import { useEffect, useState } from 'react'
 import type { Movie } from '@/types'
+import { getTenMovies } from '@/services/Movies'
 import * as S from './HomePage.styles'
-import { useCallback, useState } from 'react'
-import { uploadImage } from '@/services'
 
+//Deixar esse 4 fixos até eu criar as sessões
 const featuredMovies = [
   {
     id: '123-456-789',
@@ -64,155 +65,12 @@ const genreOptions = [
   'Oeste',
 ]
 
-export const normalMovies = [
-  {
-    id: 'movie-001',
-    title: 'O Ultimo Portal',
-    description: 'Uma cientista encontra uma passagem instavel para outra dimensao.',
-    genres: ['SCIENCE_FICTION'],
-    durationInMinutos: 132,
-    minimumAge: 12,
-    posterUrl: heroImage,
-    availableAt: '2026-06-07',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-002',
-    title: 'Noite em Neon',
-    description: 'Um detetive investiga uma serie de roubos em uma cidade futurista.',
-    genres: ['THRILLER'],
-    durationInMinutos: 118,
-    minimumAge: 16,
-    posterUrl: film,
-    availableAt: '2026-06-08',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-003',
-    title: 'Risadas no Set',
-    description: 'Uma equipe de cinema tenta terminar uma comedia cheia de imprevistos.',
-    genres: ['COMEDY'],
-    durationInMinutos: 96,
-    minimumAge: 10,
-    posterUrl: film2,
-    availableAt: '2026-06-09',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-004',
-    title: 'Vale dos Ecos',
-    description: 'Dois irmaos retornam a cidade natal para desvendar um segredo antigo.',
-    genres: ['DRAMA'],
-    durationInMinutos: 124,
-    minimumAge: 14,
-    posterUrl: heroImage,
-    availableAt: '2026-06-10',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-005',
-    title: 'Corrida Solar',
-    description: 'Pilotos atravessam desertos em uma competicao movida a energia solar.',
-    genres: ['ACTION'],
-    durationInMinutos: 110,
-    minimumAge: 12,
-    posterUrl: film,
-    availableAt: '2026-06-11',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-006',
-    title: 'A Casa da Colina',
-    description: 'Uma familia descobre que sua nova casa guarda memorias sombrias.',
-    genres: ['HORROR'],
-    durationInMinutos: 104,
-    minimumAge: 16,
-    posterUrl: film2,
-    availableAt: '2026-06-12',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-007',
-    title: 'Mapa das Estrelas',
-    description: 'Uma jovem navegadora embarca em uma aventura para salvar seu povo.',
-    genres: ['ADVENTURE'],
-    durationInMinutos: 127,
-    minimumAge: 10,
-    posterUrl: heroImage,
-    availableAt: '2026-06-14',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-008',
-    title: 'Reino de Vidro',
-    description: 'Uma princesa exilada tenta recuperar um reino protegido por magia.',
-    genres: ['FANTASY'],
-    durationInMinutos: 139,
-    minimumAge: 12,
-    posterUrl: film,
-    availableAt: '2026-06-15',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-009',
-    title: 'Primeiro Encontro',
-    description: 'Dois desconhecidos se reencontram em diferentes fases da vida.',
-    genres: ['ROMANCE'],
-    durationInMinutos: 101,
-    minimumAge: 12,
-    posterUrl: film2,
-    availableAt: '2026-06-16',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-  {
-    id: 'movie-010',
-    title: 'Pequenos Inventores',
-    description: 'Criancas constroem uma maquina improvavel para vencer uma feira escolar.',
-    genres: ['ANIMATION'],
-    durationInMinutos: 89,
-    minimumAge: 0,
-    posterUrl: heroImage,
-    availableAt: '2026-06-17',
-    active: true,
-    createdAt: '2026-05-28T00:00:00.000Z',
-    updateAt: '2026-05-28T00:00:00.000Z',
-    synopsis: ''
-  },
-] satisfies Movie[]
-
 export function HomePage() {
   const [search, setSearch] = useState('')
   const [genre, setGenre] = useState('Todos')
   const [classification, setClassification] = useState('Livre')
   const [orderBy, setOrderBy] = useState('Em cartaz')
-  const [file, setFile] = useState<File | null>(null)
+  const [movies, setMovies] = useState<Movie[]>([])
 
   const clearFilters = () => {
     setSearch('')
@@ -220,6 +78,20 @@ export function HomePage() {
     setClassification('Livre')
     setOrderBy('Em cartaz')
   }
+
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        const movies = await getTenMovies()
+        console.log('Filmes buscados:', movies)
+        setMovies(movies)
+      } catch (error) {
+        console.error('Erro ao buscar filmes:', error)
+      }
+    }
+
+    fetchMovies()
+  }, [])
 
   return (
     <S.HomePage>
@@ -245,36 +117,28 @@ export function HomePage() {
             </Card>
           )}
         />
-        <S.HomeContentFilters>
+        {/** Mover pra pagina filmes */}
+        {/* <S.HomeContentFilters>
           <Input type="text" label="Pesquisar" placeholder="Digite o nome do filme" value={search} onChange={(event) => setSearch(event.target.value)} />
           <Input type="select" label="Genero" value={genre} onChange={(e) => setGenre(e.target.value)} options={genreOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
           <Input type="select" label="Classificacao" value={classification} onChange={(e) => setClassification(e.target.value)} options={['Livre', '10', '12', '14', '16', '18']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
           <Input type="select" label="Duracao" value={orderBy} onChange={(e) => setOrderBy(e.target.value)} options={['Em cartaz', 'Em breve', 'premier']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
-          <Button type="button" variant="outlined" sx={{ alignSelf: 'normal' }} onClick={clearFilters}>Limpar filtros</Button>
-        </S.HomeContentFilters>
-        {/** Testando upload de file  */}
-        <div>
-          <Input type="file" label="Upload de filme" accept="image/*" onChange={(e) => {
-            const file = e.target.files?.[0]
-            setFile(file || null)
-          }}
-          />
-
-
-
-        </div>
-
-        {normalMovies.length > 0 ? (
-          <S.MoviesGrid>
-            {normalMovies.map((movie) => (
+          <Button type="button" variant="outlined" onClick={clearFilters} sx={{ '@media (min-width: 768px)': { alignSelf: 'flex-end' }, '@media (max-width: 768px)': { width: '100%' } }}>
+            Limpar filtros
+          </Button>
+        </S.HomeContentFilters> */}
+        <Typography variant="body1" sx={{ fontSize: '24px' }} id="recomendados">Nossas Recomendações</Typography>
+        {movies.length > 0 ? (
+          <S.MoviesGrid id="sessoes">
+            {movies.map((movie) => (
               <Card
                 key={movie.id}
                 type="normal"
                 title={movie.title}
                 description={movie.description}
-                posterUrl={movie.posterUrl}
+                posterUrl={movie.posterURL}
                 duration={movie.durationInMinutos}
-                rating={movie.minimumAge}
+                minimumAge={movie.minimumAge}
                 genres={movie.genres}
               />
             ))}

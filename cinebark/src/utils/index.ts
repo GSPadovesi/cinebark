@@ -1,5 +1,5 @@
 export { normalizeOption } from './normalizeOption'
 export { formatDuration } from './formatDuration'
-export { formatRating } from './formatRating'
 export { formatGenre } from './formatGenre'
 export { formatGenreLabel } from './formatGenreLabel'
+export { formatMinimumAge } from './formatMinimumAge'
