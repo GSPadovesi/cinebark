@@ -1,0 +1,6 @@
+export { default as cinebarkLogo } from './cinebark-logo.png'
+export { default as heroImage } from './hero.png'
+export { default as reactLogo } from './react.svg'
+export { default as viteLogo } from './vite.svg'
+export { default as film } from './duna-parte-2.jpg'
+export { default as film2 } from './bailarina.jpg'
