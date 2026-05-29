@@ -1,6 +1,6 @@
-import { api } from './api'
+import type { Session, SessionPayload } from '@/types/Session'
+import { api } from './Api'
 
-import type { Session, SessionPayload } from '@/types/sessions'
 
 export async function getSessions() {
   const { data } = await api.get<Session[]>('/sessions')

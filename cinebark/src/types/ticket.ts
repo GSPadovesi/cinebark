@@ -1,4 +1,4 @@
-import type { Session } from './sessions'
+import type { Session } from "./Session"
 
 export type Ticket = {
   id: string

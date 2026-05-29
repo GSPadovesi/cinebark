@@ -1,7 +1,6 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
-
-import { HomePage } from '@/app/routes/Home'
-import { AppLayout } from '@/components/AppLayout'
+import { HomePage } from '@/app/routes'
+import { AppLayout } from '@/components'
 
 export const appRoutes = {
   home: '/',

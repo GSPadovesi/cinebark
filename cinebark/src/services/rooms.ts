@@ -1,6 +1,6 @@
-import { api } from './api'
+import type { Room, RoomPayload } from '@/types/Room'
+import { api } from './Api'
 
-import type { Room, RoomPayload } from '@/types/room'
 
 export async function getRooms() {
   const { data } = await api.get<Room[]>('/rooms')

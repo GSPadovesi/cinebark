@@ -1,6 +1,6 @@
-import { api } from './api'
+import type { Ticket, TicketPayload } from '@/types/Ticket'
+import { api } from './Api'
 
-import type { Ticket, TicketPayload } from '@/types/ticket'
 
 export async function getTickets() {
   const { data } = await api.get<Ticket[]>('/tickets')

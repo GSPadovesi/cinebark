@@ -5,17 +5,17 @@ export const theme = createTheme({
     mode: 'dark',
 
     primary: {
-      main: '#d4a017', // dourado principal
+      main: '#d4a017',
       contrastText: '#ffffff',
     },
 
     secondary: {
-      main: '#7c3aed', // roxo premium
+      main: '#7c3aed',
     },
 
     background: {
-      default: '#050816', // fundo principal
-      paper: '#0f172a', // cards/surfaces
+      default: '#050816',
+      paper: '#0f172a',
     },
 
     text: {
@@ -63,16 +63,6 @@ export const theme = createTheme({
   },
 
   components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          background:
-            'radial-gradient(circle at top, #0f172a 0%, #050816 45%, #020617 100%)',
-          minHeight: '100vh',
-        },
-      },
-    },
-
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -86,9 +76,43 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          background: 'rgba(15, 23, 42, 0.85)',
-          border: '1px solid rgba(255,255,255,0.05)',
-          boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: 22,
+          background:
+            'linear-gradient(180deg, rgba(7,11,18,0.98) 0%, rgba(3,6,12,1) 100%)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center right',
+          border: '1px solid rgba(255,255,255,0.06)',
+          boxShadow: '0 12px 40px rgba(0,0,0,0.42)',
+        },
+      },
+    },
+
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+          padding: 16,
+
+          '&:last-child': {
+            paddingBottom: 16,
+          },
+        },
+      },
+    },
+
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontWeight: 800,
+        },
+
+        sizeSmall: {
+          height: 24,
         },
       },
     },
@@ -100,14 +124,17 @@ export const theme = createTheme({
 
       styleOverrides: {
         root: {
-          borderRadius: 12,
+          height: 46,
+          borderRadius: 14,
           paddingInline: 18,
           paddingBlock: 10,
         },
       },
+
       variants: [
         {
           props: { color: 'primary', variant: 'contained' },
+
           style: {
             background:
               'linear-gradient(135deg, #d4a017 0%, #fbbf24 100%)',
@@ -119,8 +146,10 @@ export const theme = createTheme({
             },
           },
         },
+
         {
           props: { color: 'primary', variant: 'outlined' },
+
           style: {
             borderColor: 'rgba(212,160,23,0.5)',
 
@@ -141,6 +170,171 @@ export const theme = createTheme({
           borderBottom: '1px solid rgba(255,255,255,0.05)',
         },
       },
+    },
+
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          height: 52,
+          borderRadius: 14,
+          color: '#fff',
+          background:
+            'linear-gradient(180deg, rgba(11,15,25,0.96), rgba(5,8,15,0.98))',
+          transition: 'all 0.2s ease',
+
+          '& fieldset': {
+            borderColor: 'rgba(255,255,255,0.08)',
+          },
+
+          '&:hover fieldset': {
+            borderColor: 'rgba(212,160,23,0.32)',
+          },
+
+          '&.Mui-focused fieldset': {
+            borderColor: '#d4a017',
+          },
+        },
+
+        input: {
+          paddingInline: 14,
+          fontSize: 14,
+          fontWeight: 600,
+
+          '&::placeholder': {
+            color: 'rgba(255,255,255,0.35)',
+            opacity: 1,
+          },
+        },
+      },
+    },
+
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          display: 'flex',
+          alignItems: 'center',
+          height: 52,
+          padding: '0 42px 0 14px !important',
+          fontSize: 14,
+          fontWeight: 700,
+        },
+
+        icon: {
+          color: 'rgba(255,255,255,0.72)',
+        },
+      },
+    },
+
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          marginTop: 8,
+          minWidth: 220,
+          borderRadius: 12,
+          background: '#070b12',
+          border: '1px solid rgba(255,255,255,0.06)',
+        },
+      },
+    },
+
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: 14,
+          color: '#fff',
+
+          '&:hover': {
+            background: 'rgba(212,160,23,0.12)',
+          },
+
+          '&.Mui-selected': {
+            background: 'rgba(212,160,23,0.18)',
+          },
+
+          '&.Mui-selected:hover': {
+            background: 'rgba(212,160,23,0.22)',
+          },
+        },
+      },
+    },
+
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: 'cardTitle' as never },
+
+          style: {
+            color: '#fff',
+            fontSize: 30,
+            fontWeight: 800,
+            lineHeight: 1.1,
+          },
+        },
+
+        {
+          props: { variant: 'cardDescription' as never },
+
+          style: {
+            color: 'rgba(255,255,255,0.55)',
+            fontSize: 14,
+            lineHeight: 1.5,
+          },
+        },
+
+        {
+          props: { variant: 'featuredCardTitle' as never },
+
+          style: {
+            color: '#fff',
+            fontWeight: 300,
+            letterSpacing: '0.35px',
+            lineHeight: 1,
+            textTransform: 'uppercase',
+            fontSize: 'clamp(32px, 5vw, 44px)',
+          },
+        },
+
+        {
+          props: { variant: 'featuredCardDescription' as never },
+
+          style: {
+            color: 'rgba(255,255,255,0.72)',
+            fontSize: 14,
+            lineHeight: 1.7,
+            maxWidth: 420,
+          },
+        },
+
+        {
+          props: { variant: 'featuredCardMeta' as never },
+
+          style: {
+            color: 'rgba(255,255,255,0.65)',
+            fontSize: 13,
+          },
+        },
+
+        {
+          props: { variant: 'featuredCardBadge' as never },
+
+          style: {
+            width: 'fit-content',
+            height: 30,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingInline: 10,
+            borderRadius: 8,
+            background: 'transparent',
+            border: '1px solid rgba(212, 160, 23, 0.48)',
+            color: '#d4a017',
+            fontSize: 11,
+            fontWeight: 600,
+            textTransform: 'uppercase',
+            fontFamily: 'Inter, sans-serif',
+          },
+        },
+      ],
     },
 
     MuiTextField: {

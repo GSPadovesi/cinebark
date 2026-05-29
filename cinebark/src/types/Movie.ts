@@ -19,6 +19,7 @@ export type Movie = {
   durationInMinutos: number
   minimumAge: number
   posterUrl: string
+  availableAt: string
   active: boolean
   createdAt: string
   updateAt: string
@@ -31,5 +32,6 @@ export type MoviePayload = {
   durationInMinutos: number
   minimumAge: number
   posterUrl: string
+  availableAt: string
   active: boolean
 }

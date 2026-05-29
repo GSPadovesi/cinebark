@@ -1,5 +1,5 @@
-import { CssBaseline, ThemeProvider } from '@mui/material'
-import { theme } from '../theme/theme'
+import { ThemeProvider } from '@mui/material'
+import { GlobalStyle, theme } from '@/theme'
 import type { ReactNode } from 'react'
 
 type AppProvidersProps = {
@@ -9,7 +9,7 @@ type AppProvidersProps = {
 export function AppProviders({ children }: AppProvidersProps) {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
+      <GlobalStyle />
       {children}
     </ThemeProvider>
   )

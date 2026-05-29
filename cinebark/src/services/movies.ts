@@ -1,6 +1,6 @@
-import { api } from './api'
+import type { Movie, MoviePayload } from '@/types/Movie'
+import { api } from './Api'
 
-import type { Movie, MoviePayload } from '@/types/movies'
 
 export async function getMovies() {
   const { data } = await api.get<Movie[]>('/movies')

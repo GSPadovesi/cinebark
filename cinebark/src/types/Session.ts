@@ -1,5 +1,5 @@
-import type { Movie } from './movies'
-import type { Room } from './room'
+import type { Movie } from './Movie'
+import type { Room } from './Room'
 
 export type Session = {
   id: string
