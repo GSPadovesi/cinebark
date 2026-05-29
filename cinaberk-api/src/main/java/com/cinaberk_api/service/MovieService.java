@@ -6,6 +6,8 @@ import com.cinaberk_api.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
@@ -14,6 +16,10 @@ public class MovieService {
     public MovieService(MovieRepository movieRepository, CloudinaryService cloudinaryService){
         this.movieRepository = movieRepository;
         this.cloudinaryService = cloudinaryService;
+    }
+
+    public List<Movie> findTenRandomAvailableMovies(){
+        return movieRepository.findTenRandomAvailableMovies();
     }
 
     public Movie createMovie(CreateMovieDTO movieDTO, MultipartFile file){

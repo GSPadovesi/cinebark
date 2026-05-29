@@ -1,7 +1,6 @@
 import type { Movie, MoviePayload } from '@/types/Movie'
 import { api } from '../config/Api'
 
-
 export async function getMovies() {
   const { data } = await api.get<Movie[]>('/movies')
   return data
@@ -9,6 +8,11 @@ export async function getMovies() {
 
 export async function getMovieById(id: string) {
   const { data } = await api.get<Movie>(`/movies/${id}`)
+  return data
+}
+
+export async function getTenMovies() {
+  const { data } = await api.get<Movie[]>('/movies/home')
   return data
 }
 

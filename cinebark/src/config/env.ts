@@ -4,6 +4,6 @@ type AppEnv = {
 }
 
 export const env: AppEnv = {
-  apiBaseUrl: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080',
+  apiBaseUrl: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080/cinebark-api',
   appName: import.meta.env.VITE_APP_NAME ?? 'CineBark'
 }

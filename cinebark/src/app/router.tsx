@@ -4,6 +4,9 @@ import { AppLayout } from '@/components'
 
 export const appRoutes = {
   home: '/',
+  movies: '/filmes',
+  sessions: '/sessoes',
+  rooms: '/salas',
 } as const
 
 export const router = createBrowserRouter([
@@ -18,6 +21,36 @@ export const router = createBrowserRouter([
       {
         path: '*',
         element: <Navigate to={appRoutes.home} replace />,
+      },
+    ],
+  },
+  {
+    path: appRoutes.movies,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <h1>Olá, mundo</h1>
+      },
+    ],
+  },
+  {
+    path: appRoutes.sessions,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <h1>Olá, mundo</h1>
+      },
+    ],
+  },
+  {
+    path: appRoutes.rooms,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <h1>Olá, mundo</h1>
       },
     ],
   },

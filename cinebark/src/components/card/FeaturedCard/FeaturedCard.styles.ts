@@ -5,7 +5,7 @@ export function cardSx(backgroundImage?: string): SxProps<Theme> {
     minHeight: 500,
     position: 'relative',
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'linear-gradient(145deg, #050505, #1f1405)',
-    backgroundPosition: 'center left',
+    backgroundPosition: 'center right',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
 
@@ -24,6 +24,10 @@ export function cardSx(backgroundImage?: string): SxProps<Theme> {
         rgba(5,5,5,0.58) 80%,
         rgba(5,5,5,0.82) 100%
       )`
+    },
+
+    '@media (max-width: 768px)': {
+      backgroundPosition: 'center',
     }
   }
 }

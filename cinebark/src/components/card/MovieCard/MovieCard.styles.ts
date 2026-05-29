@@ -81,6 +81,7 @@ export const descriptionSx: SxProps<Theme> = {
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  flex: 1
 }
 
 export const sessionsButtonSx: SxProps<Theme> = {
