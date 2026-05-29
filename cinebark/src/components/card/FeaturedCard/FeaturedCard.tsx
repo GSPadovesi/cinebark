@@ -6,6 +6,7 @@ import MuiCard from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
+import * as S from './FeaturedCard.styles'
 
 export const FeaturedCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
   (
@@ -30,78 +31,58 @@ export const FeaturedCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
         ref={ref}
         {...props}
         sx={[
-          {
-            minHeight: 500,
-            backgroundImage: backgroundImage
-              ? `url(${backgroundImage})`
-              : 'linear-gradient(145deg, #050505, #1f1405)',
-          },
+          S.cardSx(backgroundImage),
           ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
         ]}
       >
-        <CardContent
-          sx={{
-            position: 'relative',
-            zIndex: 1,
-            width: { xs: '100%', md: '44%' },
-            height: 500,
-            p: { xs: 2.5, md: 5 },
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            gap: 4,
-          }}
-        >
-          <Typography variant="featuredCardBadge">
+        <CardContent sx={S.contentSx}>
+          <Typography
+            sx={S.badgeSx}
+          >
             {badgeLabel}
           </Typography>
 
           {title && (
-            <Typography component="h2" variant="featuredCardTitle">
+            <Typography
+              component="h2"
+              sx={S.titleSx}
+            >
               {title}
             </Typography>
           )}
 
           {description && (
-            <Typography variant="featuredCardDescription">
+            <Typography
+              sx={S.descriptionSx}
+            >
               {description}
             </Typography>
           )}
 
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              flexWrap: 'wrap',
-            }}
-          >
-            <Typography variant="featuredCardMeta">
+          <Box sx={S.metaSx}>
+            <Typography
+              sx={S.durationSx}
+            >
               {duration}
             </Typography>
 
             <Chip
               label={rating}
               size="small"
-              sx={{
-                bgcolor: '#4b2ca3',
-                color: '#fff',
-              }}
+              sx={S.ratingChipSx}
             />
 
             <Chip
               label={genreLabel}
               size="small"
-              sx={{
-                bgcolor: 'rgba(255,255,255,0.08)',
-                color: 'rgba(255,255,255,0.75)',
-              }}
+              sx={S.genreChipSx}
             />
           </Box>
 
           {children}
 
           {actions && (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mt: 1 }}>
+            <Box sx={S.actionsSx}>
               {actions}
             </Box>
           )}

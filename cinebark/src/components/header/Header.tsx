@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button } from '../button';
+import { Button } from '@/components/button';
 import { cinebarkLogo } from '@/assets';
 import * as S from './Header.styles';
 

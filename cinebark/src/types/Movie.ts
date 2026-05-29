@@ -15,6 +15,7 @@ export type Movie = {
   id: string
   title: string
   description: string
+  synopsis: string
   genre: GenreType
   durationInMinutos: number
   minimumAge: number
@@ -28,6 +29,7 @@ export type Movie = {
 export type MoviePayload = {
   title: string
   description: string
+  synopsis: string
   genre: GenreType
   durationInMinutos: number
   minimumAge: number

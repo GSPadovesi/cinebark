@@ -56,9 +56,23 @@ export const theme = createTheme({
       fontWeight: 700,
     },
 
+    body1: {
+      color: '#94a3b8',
+      fontSize: 16,
+      lineHeight: 1.7,
+    },
+
+    body2: {
+      color: '#94a3b8',
+      fontSize: 14,
+      lineHeight: 1.6,
+    },
+
     button: {
-      fontWeight: 700,
+      fontWeight: 600,
       textTransform: 'none',
+      fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      fontSize: 16,
     },
   },
 
@@ -76,31 +90,10 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          position: 'relative',
           overflow: 'hidden',
-          borderRadius: 22,
-          background:
-            'linear-gradient(180deg, rgba(7,11,18,0.98) 0%, rgba(3,6,12,1) 100%)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center right',
+          borderRadius: 16,
           border: '1px solid rgba(255,255,255,0.06)',
-          boxShadow: '0 12px 40px rgba(0,0,0,0.42)',
-        },
-      },
-    },
-
-    MuiCardContent: {
-      styleOverrides: {
-        root: {
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 12,
-          padding: 16,
-
-          '&:last-child': {
-            paddingBottom: 16,
-          },
+          boxShadow: '0 12px 32px rgba(0,0,0,0.32)',
         },
       },
     },
@@ -133,7 +126,7 @@ export const theme = createTheme({
 
       variants: [
         {
-          props: { color: 'primary', variant: 'contained' },
+          props: { color: 'secondary', variant: 'contained' },
 
           style: {
             background:
@@ -259,89 +252,12 @@ export const theme = createTheme({
     },
 
     MuiTypography: {
-      variants: [
-        {
-          props: { variant: 'cardTitle' as never },
-
-          style: {
-            color: '#fff',
-            fontSize: 30,
-            fontWeight: 800,
-            lineHeight: 1.1,
-          },
-        },
-
-        {
-          props: { variant: 'cardDescription' as never },
-
-          style: {
-            color: 'rgba(255,255,255,0.55)',
-            fontSize: 14,
-            lineHeight: 1.5,
-          },
-        },
-
-        {
-          props: { variant: 'featuredCardTitle' as never },
-
-          style: {
-            color: '#fff',
-            fontWeight: 300,
-            letterSpacing: '0.35px',
-            lineHeight: 1,
-            textTransform: 'uppercase',
-            fontSize: 'clamp(32px, 5vw, 44px)',
-          },
-        },
-
-        {
-          props: { variant: 'featuredCardDescription' as never },
-
-          style: {
-            color: 'rgba(255,255,255,0.72)',
-            fontSize: 14,
-            lineHeight: 1.7,
-            maxWidth: 420,
-          },
-        },
-
-        {
-          props: { variant: 'featuredCardMeta' as never },
-
-          style: {
-            color: 'rgba(255,255,255,0.65)',
-            fontSize: 13,
-          },
-        },
-
-        {
-          props: { variant: 'featuredCardBadge' as never },
-
-          style: {
-            width: 'fit-content',
-            height: 30,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingInline: 10,
-            borderRadius: 8,
-            background: 'transparent',
-            border: '1px solid rgba(212, 160, 23, 0.48)',
-            color: '#d4a017',
-            fontSize: 11,
-            fontWeight: 600,
-            textTransform: 'uppercase',
-            fontFamily: 'Inter, sans-serif',
-          },
-        },
-      ],
-    },
-
-    MuiTextField: {
       styleOverrides: {
         root: {
-          '& .MuiOutlinedInput-root': {
-            background: 'rgba(255,255,255,0.03)',
+          '&.MuiTypography-paragraph': {
+            marginBottom: 16,
+            color: '#94a3b8',
+            lineHeight: 1.7,
           },
         },
       },

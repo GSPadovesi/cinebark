@@ -2,6 +2,7 @@ import { forwardRef } from 'react'
 import MuiButton from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import type { ButtonProps } from '@/types'
+import * as S from './Button.styles'
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -25,7 +26,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         variant={variant}
         startIcon={
           isLoading ? (
-            <CircularProgress color="inherit" size={18} thickness={5} />
+            <CircularProgress color="inherit" {...S.loadingIndicatorProps} />
           ) : (
             props.startIcon
           )

@@ -1,12 +1,8 @@
 import { Box, FormControl, FormHelperText, MenuItem, Select, Typography, type SelectChangeEvent } from '@mui/material'
 import { forwardRef, useId } from 'react'
-import type { InputOption, InputProps } from '@/types'
-
-function normalizeOption(option: InputOption | string): InputOption {
-  return typeof option === 'string'
-    ? { label: option, value: option }
-    : option
-}
+import { normalizeOption } from '@/utils'
+import type { InputProps } from '@/types'
+import * as S from './SelectInput.styles'
 
 export const SelectInput = forwardRef<HTMLDivElement, Omit<InputProps, 'type'>>(
   (
@@ -36,26 +32,8 @@ export const SelectInput = forwardRef<HTMLDivElement, Omit<InputProps, 'type'>>(
     return (
       <Box
         ref={ref}
-        sx={[
-          {
-            width: fullWidth ? '100%' : 200,
-          },
-          ...(Array.isArray(sx) ? sx : [sx]),
-        ]}
-      >
-        {label && (
-          <Typography
-            sx={{
-              mb: 0.8,
-              color: 'rgba(255,255,255,0.58)',
-              fontSize: 13,
-              fontWeight: 600,
-            }}
-          >
-            {label}
-          </Typography>
-        )}
-
+        sx={[S.rootSx(fullWidth), ...(Array.isArray(sx) ? sx : [sx])]}>
+        {label && (<Typography sx={S.labelSx}>{label}</Typography>)}
         <FormControl
           disabled={disabled}
           error={error}

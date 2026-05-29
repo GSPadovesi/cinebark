@@ -1,7 +1,7 @@
 
 import { forwardRef } from 'react'
 import { FeaturedCard } from './FeaturedCard'
-import { DefaultCard } from './DefaultCard'
+import { MovieCard } from './MovieCard'
 import type { CardProps } from '@/types'
 
 
@@ -15,12 +15,11 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       case 'normal':
       case 'default':
       default:
-        return <DefaultCard ref={ref} {...props} />
+        return <MovieCard ref={ref} {...props} />
     }
   },
 )
 
 Card.displayName = 'Card'
-
 
 
