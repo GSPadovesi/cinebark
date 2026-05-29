@@ -1,5 +1,5 @@
 import type { Movie, MoviePayload } from '@/types/Movie'
-import { api } from './Api'
+import { api } from '../config/Api'
 
 
 export async function getMovies() {

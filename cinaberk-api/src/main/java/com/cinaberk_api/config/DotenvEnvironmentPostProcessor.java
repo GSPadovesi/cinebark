@@ -13,10 +13,7 @@ public class DotenvEnvironmentPostProcessor implements EnvironmentPostProcessor 
 
 	@Override
 	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-		Dotenv dotenv = Dotenv.configure()
-				.ignoreIfMissing()
-				.load();
-
+		Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
 		Map<String, Object> properties = new HashMap<>();
 
 		dotenv.entries().forEach(entry -> {

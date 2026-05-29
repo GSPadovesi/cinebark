@@ -3,7 +3,7 @@ import { heroImage, film, film2 } from '@/assets'
 import { Button, Card, FeaturedSlider, Input } from '@/components'
 import type { Movie } from '@/types'
 import * as S from './HomePage.styles'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { uploadImage } from '@/services'
 
 const featuredMovies = [
@@ -39,12 +39,37 @@ const featuredMovies = [
   },
 ]
 
+const genreOptions = [
+  'Todos',
+  'Acao',
+  'Aventura',
+  'Animacao',
+  'Biografia',
+  'Comedia',
+  'Crime',
+  'Drama',
+  'Fantasia',
+  'Terror',
+  'Romance',
+  'Ficcao cientifica',
+  'Suspense',
+  'Documentario',
+  'Familia',
+  'Historia',
+  'Musica',
+  'Musical',
+  'Misterio',
+  'Esporte',
+  'Guerra',
+  'Oeste',
+]
+
 export const normalMovies = [
   {
     id: 'movie-001',
     title: 'O Ultimo Portal',
     description: 'Uma cientista encontra uma passagem instavel para outra dimensao.',
-    genre: 'SCIENCE_FICTION',
+    genres: ['SCIENCE_FICTION'],
     durationInMinutos: 132,
     minimumAge: 12,
     posterUrl: heroImage,
@@ -58,7 +83,7 @@ export const normalMovies = [
     id: 'movie-002',
     title: 'Noite em Neon',
     description: 'Um detetive investiga uma serie de roubos em uma cidade futurista.',
-    genre: 'THRILLER',
+    genres: ['THRILLER'],
     durationInMinutos: 118,
     minimumAge: 16,
     posterUrl: film,
@@ -72,7 +97,7 @@ export const normalMovies = [
     id: 'movie-003',
     title: 'Risadas no Set',
     description: 'Uma equipe de cinema tenta terminar uma comedia cheia de imprevistos.',
-    genre: 'COMEDY',
+    genres: ['COMEDY'],
     durationInMinutos: 96,
     minimumAge: 10,
     posterUrl: film2,
@@ -86,7 +111,7 @@ export const normalMovies = [
     id: 'movie-004',
     title: 'Vale dos Ecos',
     description: 'Dois irmaos retornam a cidade natal para desvendar um segredo antigo.',
-    genre: 'DRAMA',
+    genres: ['DRAMA'],
     durationInMinutos: 124,
     minimumAge: 14,
     posterUrl: heroImage,
@@ -100,7 +125,7 @@ export const normalMovies = [
     id: 'movie-005',
     title: 'Corrida Solar',
     description: 'Pilotos atravessam desertos em uma competicao movida a energia solar.',
-    genre: 'ACTION',
+    genres: ['ACTION'],
     durationInMinutos: 110,
     minimumAge: 12,
     posterUrl: film,
@@ -114,7 +139,7 @@ export const normalMovies = [
     id: 'movie-006',
     title: 'A Casa da Colina',
     description: 'Uma familia descobre que sua nova casa guarda memorias sombrias.',
-    genre: 'HORROR',
+    genres: ['HORROR'],
     durationInMinutos: 104,
     minimumAge: 16,
     posterUrl: film2,
@@ -128,7 +153,7 @@ export const normalMovies = [
     id: 'movie-007',
     title: 'Mapa das Estrelas',
     description: 'Uma jovem navegadora embarca em uma aventura para salvar seu povo.',
-    genre: 'ADVENTURE',
+    genres: ['ADVENTURE'],
     durationInMinutos: 127,
     minimumAge: 10,
     posterUrl: heroImage,
@@ -142,7 +167,7 @@ export const normalMovies = [
     id: 'movie-008',
     title: 'Reino de Vidro',
     description: 'Uma princesa exilada tenta recuperar um reino protegido por magia.',
-    genre: 'FANTASY',
+    genres: ['FANTASY'],
     durationInMinutos: 139,
     minimumAge: 12,
     posterUrl: film,
@@ -156,7 +181,7 @@ export const normalMovies = [
     id: 'movie-009',
     title: 'Primeiro Encontro',
     description: 'Dois desconhecidos se reencontram em diferentes fases da vida.',
-    genre: 'ROMANCE',
+    genres: ['ROMANCE'],
     durationInMinutos: 101,
     minimumAge: 12,
     posterUrl: film2,
@@ -170,7 +195,7 @@ export const normalMovies = [
     id: 'movie-010',
     title: 'Pequenos Inventores',
     description: 'Criancas constroem uma maquina improvavel para vencer uma feira escolar.',
-    genre: 'ANIMATION',
+    genres: ['ANIMATION'],
     durationInMinutos: 89,
     minimumAge: 0,
     posterUrl: heroImage,
@@ -195,18 +220,6 @@ export function HomePage() {
     setClassification('Livre')
     setOrderBy('Em cartaz')
   }
-
-  const handleUploadFile = useCallback(() => {
-    if (file) {
-      uploadImage(file)
-        .then((response) => {
-          console.log('Upload bem-sucedido:', response)
-        })
-        .catch((error) => {
-          console.error('Erro no upload:', error)
-        })
-    }
-  }, [file])
 
   return (
     <S.HomePage>
@@ -234,7 +247,7 @@ export function HomePage() {
         />
         <S.HomeContentFilters>
           <Input type="text" label="Pesquisar" placeholder="Digite o nome do filme" value={search} onChange={(event) => setSearch(event.target.value)} />
-          <Input type="select" label="Genero" value={genre} onChange={(e) => setGenre(e.target.value)} options={['Todos', 'Acao', 'Aventura', 'Animacao', 'Comedia', 'Drama', 'Ficcao']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
+          <Input type="select" label="Genero" value={genre} onChange={(e) => setGenre(e.target.value)} options={genreOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
           <Input type="select" label="Classificacao" value={classification} onChange={(e) => setClassification(e.target.value)} options={['Livre', '10', '12', '14', '16', '18']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
           <Input type="select" label="Duracao" value={orderBy} onChange={(e) => setOrderBy(e.target.value)} options={['Em cartaz', 'Em breve', 'premier']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
           <Button type="button" variant="outlined" sx={{ alignSelf: 'normal' }} onClick={clearFilters}>Limpar filtros</Button>
@@ -249,7 +262,6 @@ export function HomePage() {
 
 
 
-          {file && <button onClick={handleUploadFile}>Add file</button>}
         </div>
 
         {normalMovies.length > 0 ? (
@@ -263,7 +275,7 @@ export function HomePage() {
                 posterUrl={movie.posterUrl}
                 duration={movie.durationInMinutos}
                 rating={movie.minimumAge}
-                genres={movie.genre}
+                genres={movie.genres}
               />
             ))}
           </S.MoviesGrid>

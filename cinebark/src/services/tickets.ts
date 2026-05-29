@@ -1,5 +1,5 @@
 import type { Ticket, TicketPayload } from '@/types/Ticket'
-import { api } from './Api'
+import { api } from '../config/Api'
 
 
 export async function getTickets() {

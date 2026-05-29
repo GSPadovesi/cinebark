@@ -1,4 +1,4 @@
-export * from './Api'
+export * from '../config/Api'
 export * from './Movies'
 export * from './Rooms'
 export * from './Sessions'

@@ -1,5 +1,5 @@
 import type { Session, SessionPayload } from '@/types/Session'
-import { api } from './Api'
+import { api } from '../config/Api'
 
 
 export async function getSessions() {

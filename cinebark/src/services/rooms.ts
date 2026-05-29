@@ -1,5 +1,5 @@
 import type { Room, RoomPayload } from '@/types/Room'
-import { api } from './Api'
+import { api } from '../config/Api'
 
 
 export async function getRooms() {

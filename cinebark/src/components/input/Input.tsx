@@ -1,7 +1,7 @@
 import { forwardRef, type Ref } from 'react'
 import { TextInput } from './TextInput'
 import { SelectInput } from './SelectInput'
-import { FileInput } from './FileInput/FileInput'
+import { FileInput } from './FileInput'
 import type { InputProps } from '@/types'
 
 export const Input = forwardRef<HTMLInputElement | HTMLDivElement, InputProps>((props, ref) => {

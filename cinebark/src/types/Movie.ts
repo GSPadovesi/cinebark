@@ -3,20 +3,31 @@ export type GenreType =
   | 'ACTION'
   | 'ADVENTURE'
   | 'ANIMATION'
+  | 'BIOGRAPHY'
   | 'COMEDY'
+  | 'CRIME'
+  | 'DOCUMENTARY'
   | 'DRAMA'
+  | 'FAMILY'
   | 'FANTASY'
+  | 'HISTORY'
   | 'HORROR'
+  | 'MUSIC'
+  | 'MUSICAL'
+  | 'MYSTERY'
   | 'ROMANCE'
   | 'SCIENCE_FICTION'
+  | 'SPORT'
   | 'THRILLER'
+  | 'WAR'
+  | 'WESTERN'
 
 export type Movie = {
   id: string
   title: string
   description: string
   synopsis: string
-  genre: GenreType
+  genres: GenreType[]
   durationInMinutos: number
   minimumAge: number
   posterUrl: string
@@ -30,7 +41,7 @@ export type MoviePayload = {
   title: string
   description: string
   synopsis: string
-  genre: GenreType
+  genres: GenreType[]
   durationInMinutos: number
   minimumAge: number
   posterUrl: string
