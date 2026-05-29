@@ -3,7 +3,8 @@ import { heroImage, film, film2 } from '@/assets'
 import { Button, Card, FeaturedSlider, Input } from '@/components'
 import type { Movie } from '@/types'
 import * as S from './HomePage.styles'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
+import { uploadImage } from '@/services'
 
 const featuredMovies = [
   {
@@ -33,7 +34,7 @@ const featuredMovies = [
     backgroundImage: heroImage,
     availableAt: '2026-06-20',
     duration: '1h 36m',
-    rating: 'Livre',
+    rating: 'L',
     genres: ['Animacao', 'Familia', 'Comedia'],
   },
 ]
@@ -51,6 +52,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-002',
@@ -64,6 +66,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-003',
@@ -77,6 +80,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-004',
@@ -90,6 +94,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-005',
@@ -103,6 +108,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-006',
@@ -116,6 +122,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-007',
@@ -129,6 +136,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-008',
@@ -142,6 +150,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-009',
@@ -155,6 +164,7 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
   {
     id: 'movie-010',
@@ -168,14 +178,16 @@ export const normalMovies = [
     active: true,
     createdAt: '2026-05-28T00:00:00.000Z',
     updateAt: '2026-05-28T00:00:00.000Z',
+    synopsis: ''
   },
 ] satisfies Movie[]
 
 export function HomePage() {
-  const [search, setSearch] = React.useState('')
-  const [genre, setGenre] = React.useState('Todos')
-  const [classification, setClassification] = React.useState('Livre')
-  const [orderBy, setOrderBy] = React.useState('Em cartaz')
+  const [search, setSearch] = useState('')
+  const [genre, setGenre] = useState('Todos')
+  const [classification, setClassification] = useState('Livre')
+  const [orderBy, setOrderBy] = useState('Em cartaz')
+  const [file, setFile] = useState<File | null>(null)
 
   const clearFilters = () => {
     setSearch('')
@@ -183,6 +195,18 @@ export function HomePage() {
     setClassification('Livre')
     setOrderBy('Em cartaz')
   }
+
+  const handleUploadFile = useCallback(() => {
+    if (file) {
+      uploadImage(file)
+        .then((response) => {
+          console.log('Upload bem-sucedido:', response)
+        })
+        .catch((error) => {
+          console.error('Erro no upload:', error)
+        })
+    }
+  }, [file])
 
   return (
     <S.HomePage>
@@ -204,9 +228,6 @@ export function HomePage() {
                 <Button href="/#catalogo" size="large" variant="contained">
                   Ver sessoes
                 </Button>
-                <Button href="/#configuracao" size="large" variant="outlined">
-                  Detalhes
-                </Button>
               </Box>
             </Card>
           )}
@@ -218,6 +239,18 @@ export function HomePage() {
           <Input type="select" label="Duracao" value={orderBy} onChange={(e) => setOrderBy(e.target.value)} options={['Em cartaz', 'Em breve', 'premier']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
           <Button type="button" variant="outlined" sx={{ alignSelf: 'normal' }} onClick={clearFilters}>Limpar filtros</Button>
         </S.HomeContentFilters>
+        {/** Testando upload de file  */}
+        <div>
+          <Input type="file" label="Upload de filme" accept="image/*" onChange={(e) => {
+            const file = e.target.files?.[0]
+            setFile(file || null)
+          }}
+          />
+
+
+
+          {file && <button onClick={handleUploadFile}>Add file</button>}
+        </div>
 
         {normalMovies.length > 0 ? (
           <S.MoviesGrid>

@@ -1,10 +1,10 @@
 import { Box, FormControl, FormHelperText, MenuItem, Select, Typography, type SelectChangeEvent } from '@mui/material'
 import { forwardRef, useId } from 'react'
 import { normalizeOption } from '@/utils'
-import type { InputProps } from '@/types'
+import type { SelectInputProps } from '@/types'
 import * as S from './SelectInput.styles'
 
-export const SelectInput = forwardRef<HTMLDivElement, Omit<InputProps, 'type'>>(
+export const SelectInput = forwardRef<HTMLDivElement, Omit<SelectInputProps, 'type'>>(
   (
     {
       disabled,

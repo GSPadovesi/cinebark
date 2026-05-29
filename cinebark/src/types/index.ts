@@ -1,6 +1,7 @@
 export type * from './Button'
 export type * from './Card'
 export type * from './FeaturedSliderProps'
+export type * from './FileInput'
 export type * from './Input'
 export type * from './Movie'
 export type * from './Room'

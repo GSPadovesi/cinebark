@@ -1,9 +1,9 @@
 import { Box, FormControl, FormHelperText, OutlinedInput, Typography } from '@mui/material'
 import { forwardRef, useId } from 'react'
-import type { InputProps } from '@/types'
+import type { TextInputProps } from '@/types'
 import * as S from './TextInput.styles'
 
-export const TextInput = forwardRef<HTMLInputElement, Omit<InputProps, 'type'>>(
+export const TextInput = forwardRef<HTMLInputElement, Omit<TextInputProps, 'type'>>(
   (
     {
       disabled,

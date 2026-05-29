@@ -8,7 +8,6 @@ export type CardProps = Omit<MuiCardProps, 'title'> & {
   type?: CardType
   title?: string | ReactNode
   description?: string | ReactNode
-  actions?: ReactNode
   backgroundImage?: string
   posterUrl?: string
   badgeLabel?: string

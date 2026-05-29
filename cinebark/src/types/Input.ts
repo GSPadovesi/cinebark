@@ -1,6 +1,7 @@
 import type { TextFieldProps } from '@mui/material/TextField'
+import type { FileInputProps } from './FileInput'
 
-export type InputType = 'text' | 'select'
+export type InputType = 'text' | 'select' | 'file'
 
 export type InputOption = {
   label: string
@@ -8,7 +9,20 @@ export type InputOption = {
   disabled?: boolean
 }
 
-export type InputProps = Omit<TextFieldProps, 'children' | 'select' | 'type'> & {
-  type?: InputType
+export type TextInputProps = Omit<TextFieldProps, 'children' | 'select' | 'type'> & {
+  type?: 'text'
+  options?: never
+}
+
+export type SelectInputProps = Omit<TextFieldProps, 'children' | 'select' | 'type'> & {
+  type: 'select'
   options?: Array<InputOption | string>
 }
+
+export type InputProps =
+  | TextInputProps
+  | SelectInputProps
+  | (FileInputProps & {
+      type: 'file'
+      options?: never
+    })

@@ -90,8 +90,13 @@ export const durationSx: SxProps<Theme> = {
 }
 
 export const ratingChipSx: SxProps<Theme> = {
+  width: 36,
+  height: 36, 
+  borderRadius: '10px',
   bgcolor: '#4b2ca3',
   color: '#fff',
+  fontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  fontWeight: 600
 }
 
 export const genreChipSx: SxProps<Theme> = {

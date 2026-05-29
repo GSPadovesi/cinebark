@@ -11,7 +11,6 @@ import * as S from './FeaturedCard.styles'
 export const FeaturedCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
   (
     {
-      actions,
       backgroundImage,
       badgeLabel = 'Em destaque',
       children,
@@ -80,12 +79,6 @@ export const FeaturedCard = forwardRef<HTMLDivElement, Omit<CardProps, 'type'>>(
           </Box>
 
           {children}
-
-          {actions && (
-            <Box sx={S.actionsSx}>
-              {actions}
-            </Box>
-          )}
         </CardContent>
       </MuiCard>
     )
