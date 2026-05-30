@@ -10,7 +10,7 @@ export const cardSx: SxProps<Theme> = {
 export function posterSx(imageUrl?: string): SxProps<Theme> {
   return {
     position: 'relative',
-    height: 315,
+    height: 260,
     backgroundColor: 'rgba(255,255,255,0.04)',
     backgroundImage: imageUrl ? `url(${imageUrl})` : 'none',
     backgroundSize: 'cover',

@@ -1,1 +1,2 @@
-export { HomePage } from './home'
+export * from './home'
+export * from './movie'
