@@ -18,6 +18,10 @@ public class MovieService {
         this.cloudinaryService = cloudinaryService;
     }
 
+    public List<Movie> getAllMovies(){
+        return movieRepository.findAll();
+    }
+
     public List<Movie> findTenRandomAvailableMovies(){
         return movieRepository.findTenRandomAvailableMovies();
     }
