@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material'
 import { heroImage, film, film2 } from '@/assets'
 import { Button, Card, FeaturedSlider, Input } from '@/components'
+import * as S from './HomePage.styles'
 import { useEffect, useState } from 'react'
 import type { Movie } from '@/types'
-import { getTenMovies } from '@/services/Movies'
-import * as S from './HomePage.styles'
+import { getTenMovies } from '@/services'
 
 //Deixar esse 4 fixos até eu criar as sessões
 const featuredMovies = [
@@ -40,44 +40,10 @@ const featuredMovies = [
   },
 ]
 
-const genreOptions = [
-  'Todos',
-  'Acao',
-  'Aventura',
-  'Animacao',
-  'Biografia',
-  'Comedia',
-  'Crime',
-  'Drama',
-  'Fantasia',
-  'Terror',
-  'Romance',
-  'Ficcao cientifica',
-  'Suspense',
-  'Documentario',
-  'Familia',
-  'Historia',
-  'Musica',
-  'Musical',
-  'Misterio',
-  'Esporte',
-  'Guerra',
-  'Oeste',
-]
 
 export function HomePage() {
-  const [search, setSearch] = useState('')
-  const [genre, setGenre] = useState('Todos')
-  const [classification, setClassification] = useState('Livre')
-  const [orderBy, setOrderBy] = useState('Em cartaz')
   const [movies, setMovies] = useState<Movie[]>([])
 
-  const clearFilters = () => {
-    setSearch('')
-    setGenre('Todos')
-    setClassification('Livre')
-    setOrderBy('Em cartaz')
-  }
 
   useEffect(() => {
     async function fetchMovies() {
@@ -91,7 +57,7 @@ export function HomePage() {
     }
 
     fetchMovies()
-  }, [])
+  }, []);
 
   return (
     <S.HomePage>
@@ -117,16 +83,6 @@ export function HomePage() {
             </Card>
           )}
         />
-        {/** Mover pra pagina filmes */}
-        {/* <S.HomeContentFilters>
-          <Input type="text" label="Pesquisar" placeholder="Digite o nome do filme" value={search} onChange={(event) => setSearch(event.target.value)} />
-          <Input type="select" label="Genero" value={genre} onChange={(e) => setGenre(e.target.value)} options={genreOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
-          <Input type="select" label="Classificacao" value={classification} onChange={(e) => setClassification(e.target.value)} options={['Livre', '10', '12', '14', '16', '18']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
-          <Input type="select" label="Duracao" value={orderBy} onChange={(e) => setOrderBy(e.target.value)} options={['Em cartaz', 'Em breve', 'premier']} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
-          <Button type="button" variant="outlined" onClick={clearFilters} sx={{ '@media (min-width: 768px)': { alignSelf: 'flex-end' }, '@media (max-width: 768px)': { width: '100%' } }}>
-            Limpar filtros
-          </Button>
-        </S.HomeContentFilters> */}
         <Typography variant="body1" sx={{ fontSize: '24px' }} id="recomendados">Nossas Recomendações</Typography>
         {movies.length > 0 ? (
           <S.MoviesGrid id="sessoes">
