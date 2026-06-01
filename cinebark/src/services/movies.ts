@@ -1,8 +1,30 @@
-import type { Movie, MoviePayload } from '@/types/Movie'
+import type {
+  Movie,
+  MoviePayload,
+  MoviesPage,
+} from '@/types/Movie'
 import { api } from '../config/Api'
 
-export async function getMovies() {
-  const { data } = await api.get<Movie[]>('/movies')
+export async function getMovies(page: number, search: string, genre: string, classification: string, minimumAge: string, signal?: AbortSignal) {
+  const params = new URLSearchParams();
+  params.append('page', page.toString());
+  if (search.trim()) params.append('search', search);
+  if (genre.trim()) params.append('genre', genre);
+  if (classification.trim()) params.append('orderBy', classification);
+  if (minimumAge.trim()) params.append('minimumAge', minimumAge);
+
+  const { data } = await api.get<MoviesPage>(`/movies?${params.toString()}`, {
+    method: 'GET',
+    signal,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (!data) {
+    throw new Error('No movies found')
+  }
+
   return data
 }
 

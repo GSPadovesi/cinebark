@@ -1,7 +1,7 @@
 import { Box, FormControl, FormHelperText, MenuItem, Select, Typography, type SelectChangeEvent } from '@mui/material'
 import { forwardRef, useId } from 'react'
 import { normalizeOption } from '@/utils'
-import type { SelectInputProps } from '@/types'
+import type { InputOption, SelectInputProps } from '@/types'
 import * as S from './SelectInput.styles'
 
 export const SelectInput = forwardRef<HTMLDivElement, Omit<SelectInputProps, 'type'>>(
@@ -48,7 +48,7 @@ export const SelectInput = forwardRef<HTMLDivElement, Omit<SelectInputProps, 'ty
             displayEmpty
             onChange={handleChange}
           >
-            {normalizedOptions.map((option) => (
+            {normalizedOptions.map((option: InputOption) => (
               <MenuItem
                 key={option.value}
                 value={option.value}

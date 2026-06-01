@@ -7,6 +7,7 @@ export const appRoutes = {
   movies: '/filmes',
   sessions: '/sessoes',
   rooms: '/salas',
+  teste: '/filmes/teste'
 } as const
 
 export const router = createBrowserRouter([
@@ -54,4 +55,14 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: appRoutes.teste,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <h1>Olá, mundo</h1>
+      }
+    ]
+  }
 ])

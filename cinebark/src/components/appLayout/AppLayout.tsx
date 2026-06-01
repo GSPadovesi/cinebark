@@ -1,12 +1,17 @@
-import { Outlet } from 'react-router-dom'
-import { Header, Footer } from '@/components'
+import { Outlet, useLocation } from 'react-router-dom'
+import { Header, Footer, Breadcrumb } from '@/components'
 import * as S from './AppLayout.styles'
 
 export function AppLayout() {
+  const location = useLocation();
+
   return (
     <>
       <Header />
       <S.Main>
+        <S.BreadcrumbWrapper>
+          <Breadcrumb options={location.pathname.split('/ ')} />
+        </S.BreadcrumbWrapper>
         <Outlet />
       </S.Main>
       <Footer />
