@@ -4,7 +4,12 @@ import com.cinaberk_api.dto.movie.CreateMovieDTO;
 import com.cinaberk_api.dto.movie.ListMovieDTO;
 import com.cinaberk_api.dto.movie.ResponseMovieDTO;
 import com.cinaberk_api.entity.Movie;
+import com.cinaberk_api.enums.GenreType;
 import com.cinaberk_api.service.MovieService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,27 +35,24 @@ public class MovieController {
         this.objectMapper = objectMapper;
     }
 
+    //    versão antiga
+//    @GetMapping
+//    public ResponseEntity<ListMovieDTO> getAllMovies(){
+//        return ResponseEntity.status(HttpStatus.OK).body(movieService.getAllMovies());
+//    }
+
     @GetMapping
-    public ResponseEntity<?> getAllMovies(){
-        List<ResponseMovieDTO> movies = movieService.getAllMovies().stream().map(ResponseMovieDTO::new).toList();
-
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime preSaleLimit = now.plusMonths(2);
-
-        ListMovieDTO movieData = movies.stream().collect(
-                ListMovieDTO::new,
-                (dto, movie) -> {
-                    if (!movie.availableAt().isAfter(now)) {
-                        dto.addAvailable(movie);
-                    } else if (!movie.availableAt().isAfter(preSaleLimit)) {
-                        dto.addPreSale(movie);
-                    } else {
-                        dto.addSoon(movie);
-                    }
-                },
-                ListMovieDTO::merge
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(movieData);
+    public ResponseEntity<Page<ResponseMovieDTO>> getAllMovies(
+            @RequestParam(required = false) GenreType genre,
+            @RequestParam(required = false) Integer minimumAge,
+            @RequestParam(required = false) String availability,
+            @PageableDefault(
+            page = 0,
+            size = 10,
+            sort = "availableAt",
+            direction = Sort.Direction.ASC
+    ) Pageable pageable){
+        return ResponseEntity.status(HttpStatus.OK).body(movieService.getAllMovies(genre, minimumAge, availability, pageable));
     }
 
     @GetMapping("/home")
