@@ -50,6 +50,7 @@ public class MovieService {
 //    }
 
     public Page<ResponseMovieDTO> getAllMovies(
+            String search,
             GenreType genre,
             Integer minimumAge,
             String availability,
@@ -60,12 +61,16 @@ public class MovieService {
 
         Specification<Movie> spec = ((root, query, criteriaBuilder) -> criteriaBuilder.isTrue(root.get("active")));
 
-        if(genre != null) spec.and(((root, query, criteriaBuilder) -> criteriaBuilder.isMember(genre, root.get("genres"))));
-        if(minimumAge != null) spec.and(((root, query, criteriaBuilder) -> criteriaBuilder.isMember(minimumAge, root.get("minimumAge"))));
+        if(search != null && !search.isBlank()) {
+            String term = "%" + search.trim().toLowerCase() + "%";
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), term));
+        }
+        if(genre != null) spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.isMember(genre, root.get("genres")));
+        if(minimumAge != null) spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("minimumAge"), minimumAge));
         if(availability != null) spec = switch (availability.toUpperCase()){
-            case "AVAILABLE" -> spec.and(((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("availableAt"), now)));
-            case "PRE_SALE" -> spec.and(((root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("availableAt"), now, preSaleLimit)));
-            case "SOON" -> spec.and(((root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get("availableAt"), preSaleLimit)));
+            case "AVAILABLE" -> spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("availableAt"), now));
+            case "PRE_SALE" -> spec.and((root, query, criteriaBuilder) -> criteriaBuilder.between(root.get("availableAt"), now, preSaleLimit));
+            case "SOON" -> spec.and((root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get("availableAt"), preSaleLimit));
             default -> throw new IllegalArgumentException("Disponibilidade invalida" + availability);
         };
 

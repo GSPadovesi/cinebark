@@ -43,16 +43,15 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<Page<ResponseMovieDTO>> getAllMovies(
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) GenreType genre,
             @RequestParam(required = false) Integer minimumAge,
             @RequestParam(required = false) String availability,
             @PageableDefault(
             page = 0,
-            size = 10,
-            sort = "availableAt",
-            direction = Sort.Direction.ASC
+            size = 10
     ) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(movieService.getAllMovies(genre, minimumAge, availability, pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(movieService.getAllMovies(search, genre, minimumAge, availability, pageable));
     }
 
     @GetMapping("/home")
