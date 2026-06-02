@@ -1,55 +1,14 @@
 import { forwardRef, useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react';
-import { Input } from '../input';
-import { Button } from '../button';
+import { Input } from '../../input';
+import { Button } from '../../button';
 import { useMovies } from '@/hooks';
-import type { ClassificationType, GenreType } from '@/types';
+import type { AvailabilityType, GenreType } from '@/types';
 import { Grid, Pagination, Typography } from '@mui/material';
-import { Card } from '../card';
-import { Skeleton } from '../skeleton';
+import { Card } from '../../card';
+import { Skeleton } from '../../skeleton';
 import Box from '@mui/material/Box';
 import * as S from './MovieList.styles';
-
-const genreOptions = [
-  { label: 'Todos', value: '' },
-  { label: 'Ação', value: 'ACTION' },
-  { label: 'Aventura', value: 'ADVENTURE' },
-  { label: 'Animação', value: 'ANIMATION' },
-  { label: 'Biografia', value: 'BIOGRAPHY' },
-  { label: 'Comédia', value: 'COMEDY' },
-  { label: 'Crime', value: 'CRIME' },
-  { label: 'Drama', value: 'DRAMA' },
-  { label: 'Fantasia', value: 'FANTASY' },
-  { label: 'Terror', value: 'HORROR' },
-  { label: 'Romance', value: 'ROMANCE' },
-  { label: 'Ficção científica', value: 'SCIENCE_FICTION' },
-  { label: 'Suspense', value: 'THRILLER' },
-  { label: 'Documentário', value: 'DOCUMENTARY' },
-  { label: 'Família', value: 'FAMILY' },
-  { label: 'História', value: 'HISTORY' },
-  { label: 'Música', value: 'MUSIC' },
-  { label: 'Musical', value: 'MUSICAL' },
-  { label: 'Mistério', value: 'MYSTERY' },
-  { label: 'Esporte', value: 'SPORT' },
-  { label: 'Guerra', value: 'WAR' },
-  { label: 'Oeste', value: 'WESTERN' },
-] satisfies Array<{ label: string, value: GenreType | '' }>
-
-const ageClassificationOptions = [
-  { label: 'Todos', value: '' },
-  { label: 'Livre', value: '0' },
-  { label: '10', value: '10' },
-  { label: '12', value: '12' },
-  { label: '14', value: '14' },
-  { label: '16', value: '16' },
-  { label: '18', value: '18' },
-] satisfies Array<{ label: string, value: string }>
-
-const orderByOptions = [
-  { label: 'Todos', value: '' },
-  { label: 'Em cartaz', value: 'AVAILABLE' },
-  { label: 'Pré-venda', value: 'PRE_ORDER' },
-  { label: 'Em breve', value: 'SOON' },
-] satisfies Array<{ label: string, value: ClassificationType | '' }>
+import { ageClassificationOptions, genreOptions, orderByOptions } from './MovieList.constants';
 
 
 export const MovieList = forwardRef<HTMLDivElement>((_, ref) => {
@@ -71,7 +30,7 @@ export const MovieList = forwardRef<HTMLDivElement>((_, ref) => {
 
   const onGenreChange = useCallback((e: ChangeEvent<HTMLInputElement>) => { setFilter('genre', e.target.value as GenreType | '') }, [setFilter])
   const onMinimunAgeChange = useCallback((e: ChangeEvent<HTMLInputElement>) => { setFilter('minimumAge', e.target.value) }, [setFilter])
-  const onOrderByChange = useCallback((e: ChangeEvent<HTMLInputElement>) => { setFilter('orderBy', e.target.value as ClassificationType | '') }, [setFilter])
+  const onAvailabilityByChange = useCallback((e: ChangeEvent<HTMLInputElement>) => { setFilter('availability', e.target.value as AvailabilityType | '') }, [setFilter])
   const onClearFilters = useCallback(() => {
     clearTimeout(timeRef.current)
     setSearch('')
@@ -92,7 +51,7 @@ export const MovieList = forwardRef<HTMLDivElement>((_, ref) => {
         <Input type="text" label="Pesquisar" placeholder="Digite o nome do filme" value={search} onChange={onSearchChange} />
         <Input type="select" label="Genero" value={filters.genre} onChange={onGenreChange} options={genreOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
         <Input type="select" label="Classificacao" value={filters.minimumAge ?? ''} onChange={onMinimunAgeChange} options={ageClassificationOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
-        <Input type="select" label="Ordenado por" value={filters.orderBy} onChange={onOrderByChange} options={orderByOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
+        <Input type="select" label="Ordenado por" value={filters.availability} onChange={onAvailabilityByChange} options={orderByOptions} sx={{ '@media (max-width: 768px)': { width: '100%' } }} />
         <Button type="button" variant="outlined" onClick={onClearFilters} sx={{ '@media (min-width: 768px)': { alignSelf: 'flex-end' }, '@media (max-width: 768px)': { width: '100%' } }}>
           Limpar filtros
         </Button>

@@ -1,4 +1,4 @@
-import { MovieContext } from '@/providers/MovieProvider'
+import { MovieContext } from '@/context'
 import { useContext } from 'react'
 
 

@@ -49,7 +49,6 @@ export function HomePage() {
     async function fetchMovies() {
       try {
         const movies = await getTenMovies()
-        console.log('Filmes buscados:', movies)
         setMovies(movies)
       } catch (error) {
         console.error('Erro ao buscar filmes:', error)

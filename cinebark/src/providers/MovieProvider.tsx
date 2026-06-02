@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import type { Movie, MovieContextValue, MovieFilters, MovieProviderProps } from '@/types'
 import { getMovies } from '@/services'
+import { MovieContext } from '@/context'
 
 
 const minimumLoadingTime = 500
@@ -8,11 +9,9 @@ const minimumLoadingTime = 500
 const initialFilters: MovieFilters = {
   search: '',
   genre: '',
-  orderBy: '',
+  availability: '',
   minimumAge: '',
 }
-
-export const MovieContext = createContext<MovieContextValue | null>(null)
 
 export function MovieProvider({ children }: MovieProviderProps) {
   const [movies, setMovies] = useState<Movie[]>([])
@@ -22,10 +21,10 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<boolean | null>(null)
 
-  function setFilter<K extends keyof MovieFilters>(
+  const setFilter = <K extends keyof MovieFilters>(
     name: K,
     value: MovieFilters[K],
-  ) {
+  ) => {
     setPage(0)
     setFilters((currentFilters) => ({
       ...currentFilters,
@@ -33,7 +32,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
     }))
   }
 
-  function clearFilters() {
+  const clearFilters = () => {
     setPage(0)
     setFilters(initialFilters)
   }
@@ -52,7 +51,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
           page,
           filters.search,
           filters.genre,
-          filters.orderBy,
+          filters.availability,
           filters.minimumAge,
           controller.signal
         )

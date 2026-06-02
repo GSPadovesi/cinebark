@@ -4,16 +4,18 @@ import { CardContent, Typography } from '@mui/material';
 import MuiCard from '@mui/material/Box';
 import * as S from './Banner.styles';
 
-export const Banner = forwardRef<HTMLDivElement, BannerProps>(({
-  backgroundImage,
-  title = '',
-  subtitle = '',
-  content = '',
-  children,
-  ...props
-}, ref) => {
+export const Banner = forwardRef<HTMLDivElement, BannerProps>((
+  {
+    backgroundImage,
+    title = '',
+    subtitle = '',
+    content = '',
+    children,
+    sx,
+    ...props
+  }, ref) => {
   return (
-    <MuiCard ref={ref} {...props} sx={S.bannerSx()}>
+    <MuiCard {...props} ref={ref} sx={[S.bannerSx(), ...(Array.isArray(sx) ? sx : [sx])]}>
       <CardContent sx={S.contentSx}>
         <CardContent sx={S.HeaderSx}>
           {title && (

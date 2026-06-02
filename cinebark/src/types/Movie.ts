@@ -23,7 +23,7 @@ export type GenreType =
   | 'WAR'
   | 'WESTERN'
 
-export type ClassificationType = 'AVAILABLE' | 'PRE_ORDER' | 'SOON'
+export type AvailabilityType = 'AVAILABLE' | 'PRE_SALE' | 'SOON'
 
 export type Movie = {
   id: string
@@ -83,7 +83,7 @@ type MoviesPageSort = {
 export type MovieFilters = {
   search: string
   genre: GenreType | ''
-  orderBy: ClassificationType | ''
+  availability: AvailabilityType | ''
   minimumAge: string
 }
 

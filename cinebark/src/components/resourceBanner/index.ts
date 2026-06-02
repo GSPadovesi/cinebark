@@ -1,0 +1,1 @@
+export { ResourceBanner } from './ResourceBanner';

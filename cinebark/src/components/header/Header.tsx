@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/button';
 import { cinebarkLogo } from '@/assets';
-import { House, Film, Timer, Projector } from 'lucide-react';
-import { Typography } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { House, Film, Timer, Projector, X } from 'lucide-react';
+import { Box, Typography, useMediaQuery } from '@mui/material';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
 import * as S from './Header.styles';
 
@@ -17,12 +17,15 @@ const links = [
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const isMobile = useMediaQuery('(max-width: 1024px)');
   const location = useLocation();
   const currentHref = `${location.pathname}${location.hash}`;
   const isActiveLink = (href: string) => currentHref === href;
   const navigate = useNavigate();
 
   const handleRedirect = (href: string) => {
+    setIsOpen(false);
     navigate(href);
   };
 
@@ -47,30 +50,37 @@ export const Header: React.FC = () => {
   }, [location.hash]);
 
   return (
-    <S.Header isScrolled={isScrolled}>
-      <S.HeaderWrapper>
+    <Box component="header" sx={S.headerSx(isScrolled)}>
+      <Box sx={S.headerWrapperSx}>
         <img src={cinebarkLogo} alt="Cinebark Cinemas" />
-        <S.HeaderList>
+        <Box component="ul" sx={S.headerListSx(isOpen)}>
+          {isMobile && <X className='buttonClose' size={16} onClick={() => setIsOpen(false)} />}
           {links.map((link) => {
             const isActive = isActiveLink(link.href);
 
             return (
-              <S.HeaderListItem key={link.href} isPage={isActive} onClick={() => handleRedirect(link.href)}>
-                <S.HeaderListItemContent>
+              <Box component="li" key={link.href} sx={S.headerListItemSx(isActive)} onClick={() => handleRedirect(link.href)}>
+                <Box sx={S.headerListItemContentSx}>
                   {React.cloneElement(link.icon, { size: 16, color: isActive ? '#d4a017' : '#fff' })}
                   <Typography variant="body1" color={isActive ? 'primary' : 'textPrimary'}>
                     {link.name}
                   </Typography>
-                  <S.HeaderListItemLink to={link.href} aria-label={link.name} />
-                </S.HeaderListItemContent>
-              </S.HeaderListItem>
+                  <Box component={Link} to={link.href} aria-label={link.name} sx={S.headerListItemLinkSx} />
+                </Box>
+              </Box>
             );
           })}
-        </S.HeaderList>
-        <Button href="/#configuracao" size="large" variant="outlined">
+          {isMobile && <Button size="large" variant="outlined" onClick={() => console.log('Só para adm')}>
+            Administrador
+          </Button>}
+        </Box>
+        {isMobile && <Button size="large" variant="outlined" onClick={() => setIsOpen(true)}>
+          Menu
+        </Button>}
+        {!isMobile && <Button href="/#configuracao" size="large" variant="outlined">
           Administrador
-        </Button>
-      </S.HeaderWrapper>
-    </S.Header>
+        </Button>}
+      </Box>
+    </Box>
   );
 };
