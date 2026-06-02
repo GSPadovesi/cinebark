@@ -2,6 +2,7 @@ import { ThemeProvider } from '@mui/material'
 import { GlobalStyle, theme } from '@/theme'
 import type { ReactNode } from 'react'
 import { MovieProvider } from './MovieProvider'
+import { RoomProvider } from './RoomProvider'
 
 type AppProvidersProps = {
   children: ReactNode
@@ -12,7 +13,9 @@ export function AppProviders({ children }: AppProvidersProps) {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <MovieProvider>
-        {children}
+        <RoomProvider>
+          {children}
+        </RoomProvider>
       </MovieProvider>
     </ThemeProvider>
   )

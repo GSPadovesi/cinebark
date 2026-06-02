@@ -16,7 +16,7 @@ export function bannerSx(): SxProps<Theme> {
       background: `
       linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.92) 36%,
+        rgba(0, 0, 0, 0.99) 36%,
         rgba(0, 0, 0, 0.36) 50%,
         rgba(0, 0, 0, 0) 60%
       )`,
@@ -28,7 +28,7 @@ export function bannerSx(): SxProps<Theme> {
           linear-gradient(
             90deg,
             rgba(0, 0, 0, 0.9) 0%,
-            rgba(0, 0, 0, 0.65) 60%,
+            rgba(0, 0, 0, 0.65) 80%,
             rgba(0, 0, 0, 0.25) 100%
           )`,
       },

@@ -1,5 +1,5 @@
 import { moviePlaceholder } from '@/assets';
-import { Button, MovieList, Banner } from '@/components';
+import { Button, List, Banner } from '@/components';
 import { Typography } from '@mui/material';
 import * as S from './MoviePage.styles';
 
@@ -17,7 +17,7 @@ export const MoviePage = () => {
             </Button>
           </S.BannerContent>
         </Banner>
-        <MovieList />
+        <List type="movieList" />
       </S.MoviePageContent>
     </S.MoviePage>
   );

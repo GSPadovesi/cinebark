@@ -1,9 +1,25 @@
-import type { Room, RoomPayload } from '@/types/Room'
+import type { Room, RoomPage, RoomPayload } from '@/types/Room'
 import { api } from '../config/Api'
 
 
-export async function getRooms() {
-  const { data } = await api.get<Room[]>('/rooms')
+export async function getRooms(page: number, type: string, resource: string, capacity: string, signal?: AbortSignal) {
+  const params = new URLSearchParams();
+  params.append('page', page.toString());
+  if (type.trim()) params.append('type', type);
+  if (resource.trim()) params.append('resource', resource);
+  if (capacity.trim()) params.append('capacity', capacity);
+  const { data } = await api.get<RoomPage>(`/rooms?${params.toString()}`, { 
+    method: 'GET',
+    signal ,
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+
+  if(!data) {
+    throw new Error('No rooms found')
+  }
+
   return data
 }
 
