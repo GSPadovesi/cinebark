@@ -10,7 +10,7 @@ export function AppLayout() {
       <Header />
       <S.Main>
         <S.BreadcrumbWrapper>
-          <Breadcrumb options={location.pathname.split('/ ')} />
+          <Breadcrumb links={location.pathname} />
         </S.BreadcrumbWrapper>
         <Outlet />
       </S.Main>

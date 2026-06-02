@@ -129,7 +129,7 @@ export const MovieList = forwardRef<HTMLDivElement>((_, ref) => {
             {movies.map(movie => (
               <Grid key={movie.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }} sx={{ display: 'flex' }}>
                 <Card
-                  type="normal"
+                  type="movieCard"
                   title={movie.title}
                   description={movie.description}
                   posterUrl={movie.posterURL}

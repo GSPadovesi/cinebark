@@ -9,10 +9,10 @@ import type { CardProps } from '@/types'
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ type = 'default', ...props }, ref) => {
     switch (type) {
-      case 'featured':
+      case 'movieFeatured':
         return <FeaturedCard ref={ref} {...props} />
 
-      case 'normal':
+      case 'movieCard':
       case 'default':
       default:
         return <MovieCard ref={ref} {...props} />
