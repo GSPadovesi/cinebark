@@ -1,6 +1,5 @@
-import { Banner } from '@/components/banner/Banner';
 import { moviePlaceholder } from '@/assets';
-import { Button, MovieList } from '@/components';
+import { Button, MovieList, Banner } from '@/components';
 import { Typography } from '@mui/material';
 import * as S from './MoviePage.styles';
 

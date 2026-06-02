@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
-import { HomePage, MoviePage } from '@/app/routes'
+import { HomePage, MoviePage, SessionPage, RoomPage } from '@/app/routes'
 import { AppLayout } from '@/components'
 
 export const appRoutes = {
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Olá, mundo</h1>
+        element: <SessionPage />
       },
     ],
   },
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Olá, mundo</h1>
+        element: <RoomPage />
       },
     ],
   },

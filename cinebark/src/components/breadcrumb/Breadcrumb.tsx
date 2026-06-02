@@ -4,30 +4,29 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import { Box } from '@mui/material';
 
-const router: Record<string, {
-  label: string,
-  href: string
-}> = {
-  '/': { label: 'inicio', href: '/' },
-  '/filmes': { label: 'filmes', href: '/filmes' },
-  '/sessoes': { label: 'sessoes', href: '/sessoes' },
-  '/salas': { label: 'salas', href: '/salas' },
-  '/testes': { label: 'teste', href: '/teste' }
+const router: Record<string, string> = {
+  '': 'Início',
+  'filmes': 'Filmes',
+  'filmes/teste': 'Teste',
+  'sessoes': 'Sessões',
+  'salas': 'Salas',
+  'teste': 'Teste',
 }
 
 export const Breadcrumb = React.forwardRef<HTMLDivElement, any>(({
-  options
+  links
 }, ref) => {
   function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     event.preventDefault();
     console.info('You clicked a breadcrumb.');
   }
+  console.log(links.split('/'));
   return (
-    <Box ref={ref} component="div" sx={{ p: 2 }}>
+    <Box ref={ref} component="div">
       <Breadcrumbs aria-label="breadcrumb">
-        {options?.map((item: any) => (
-          <Link underline='hover' color='inherit' href={router[item]?.href ?? '/'}>
-            {router[item]?.label}
+        {links.split('/')?.map((item: any) => (
+          <Link underline='hover' color='inherit' href={router[item]} sx={{ cursor: 'pointer', textTransform: 'capitalize' }} key={item}>
+            {router[item]}
           </Link>
         ))}
       </Breadcrumbs>

@@ -67,7 +67,7 @@ export function HomePage() {
           getKey={(movie) => movie.id}
           renderItem={(movie) => (
             <Card
-              type="featured"
+              type="movieFeatured"
               title={movie.title}
               description={movie.description}
               backgroundImage={movie.backgroundImage}
@@ -89,7 +89,7 @@ export function HomePage() {
             {movies.map((movie) => (
               <Card
                 key={movie.id}
-                type="normal"
+                type="movieCard"
                 title={movie.title}
                 description={movie.description}
                 posterUrl={movie.posterURL}
