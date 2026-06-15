@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecificationExecutor<Movie> {
-    @Query(value = "SELECT * FROM movies WHERE active = true AND available_at >= CURRENT_TIMESTAMP ORDER BY RANDOM() LIMIT 10", nativeQuery = true)
+    @Query(value = "SELECT * FROM movies WHERE active = true AND available_at <= CURRENT_TIMESTAMP ORDER BY RANDOM() LIMIT 10", nativeQuery = true)
     public List<Movie> findTenRandomAvailableMovies();
 }

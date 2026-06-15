@@ -43,7 +43,6 @@ public class Movie {
     private LocalDateTime updateAt;
 
     public Movie(){
-
     }
 
     public Movie(String title, String description, String synopsis, List<GenreType> genres, Integer durationInMinutos, Integer minimumAge, String posterURL, LocalDateTime availableAt){
@@ -185,5 +184,13 @@ public class Movie {
         }
 
         return this;
+    }
+
+    public void deactivate(){
+        this.active = false;
+    }
+
+    public void activate(){
+        this.active = true;
     }
 }

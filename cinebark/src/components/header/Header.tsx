@@ -17,7 +17,7 @@ const links = [
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const isMobile = useMediaQuery('(max-width: 1024px)');
   const location = useLocation();
   const currentHref = `${location.pathname}${location.hash}`;
