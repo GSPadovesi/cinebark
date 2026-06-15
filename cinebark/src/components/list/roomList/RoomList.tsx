@@ -1,6 +1,6 @@
 import { forwardRef, useCallback, type ChangeEvent } from 'react'
 import { Box, Pagination, Typography } from '@mui/material'
-import { Button, Input } from '@/components'
+import { Button, Card, Input } from '@/components'
 import { useRooms } from '@/hooks'
 import { RoomTypeOptions, RoomResourceOptions, RoomCapacityOptions } from './RoomList.constants'
 import type { Resource, RoomType } from '@/types'
@@ -21,7 +21,6 @@ export const RoomList = forwardRef<HTMLDivElement>((props, ref) => {
     setFilter('capacity', e.target.value as string | '');
   }, [setFilter])
 
-
   return (
     <Box ref={ref} {...props} sx={S.SXRoomList}>
       <Box sx={S.SXRoomListFilters}>
@@ -38,7 +37,16 @@ export const RoomList = forwardRef<HTMLDivElement>((props, ref) => {
         ) : error ? (
           <h1>Erro</h1>
         ) : rooms.map(room => (
-          <h1>{room.number}</h1>
+          <Card
+            type="roomCard"
+            description={room.description}
+            posterUrl={room.posterURL}
+            number={room.number}
+            capacity={room.capacity}
+            roomType={room.roomType}
+            resources={room.resources}
+            active={room.active}
+          />
         ))}
       </Box>
       {!loading && !error && rooms.length > 0 && <Box sx={S.SXContainerOptions}>

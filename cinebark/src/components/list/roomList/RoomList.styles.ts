@@ -28,6 +28,9 @@ export const SXRoomListFilters: SxProps<Theme> = {
 
 export const SXContainerList: SxProps<Theme> = {
   width: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '12px',
   overflow: 'hidden'
 }
 
