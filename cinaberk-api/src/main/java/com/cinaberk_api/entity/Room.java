@@ -101,6 +101,10 @@ public class Room {
         return resources;
     }
 
+    public String getPosterURL() {
+        return posterURL;
+    }
+
     public Room updateRoom(Integer number, Integer capacity, RoomType roomType, String description, String posterURL, Set<ResourceType> resources){
         if(number != null){
             if(number <= 0){

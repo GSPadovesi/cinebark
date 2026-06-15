@@ -14,6 +14,7 @@ public record ResponseRoomDTO(
         RoomType roomType,
         String description,
         Set<ResourceType> resources,
+        String posterURL,
         boolean active
 
 ) {
@@ -25,6 +26,7 @@ public record ResponseRoomDTO(
                 room.getRoomType(),
                 room.getDescription(),
                 Set.copyOf(room.getResources()),
+                room.getPosterURL(),
                 room.isActive()
         );
     }

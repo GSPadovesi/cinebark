@@ -10,6 +10,7 @@ export type Room = {
   roomType: RoomType
   description: string
   resources: Resource[]
+  posterURL: string
   active: boolean
   createdAt: string
   updatedAt: string
