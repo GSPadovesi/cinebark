@@ -70,14 +70,14 @@ export const Header: React.FC = () => {
               </Box>
             );
           })}
-          {isMobile && <Button size="large" variant="outlined" onClick={() => console.log('Só para adm')}>
+          {isMobile && <Button size="large" variant="outlined" onClick={() => handleRedirect('/login')}>
             Administrador
           </Button>}
         </Box>
         {isMobile && <Button size="large" variant="outlined" onClick={() => setIsOpen(true)}>
           Menu
         </Button>}
-        {!isMobile && <Button href="/#configuracao" size="large" variant="outlined">
+        {!isMobile && <Button href="/login" size="large" variant="outlined">
           Administrador
         </Button>}
       </Box>

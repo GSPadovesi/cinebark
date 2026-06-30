@@ -10,7 +10,7 @@ export type InputOption = {
 }
 
 export type TextInputProps = Omit<TextFieldProps, 'children' | 'select' | 'type'> & {
-  type?: 'text'
+  type?: 'email' | 'password' | 'search' | 'tel' | 'text' | 'url'
   options?: never
 }
 

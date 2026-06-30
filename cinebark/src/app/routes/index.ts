@@ -1,4 +1,5 @@
 export * from './home'
+export * from './auth'
 export * from './movie'
 export * from './session'
 export * from './room'
