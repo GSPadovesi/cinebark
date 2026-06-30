@@ -3,7 +3,7 @@ import { forwardRef, useId } from 'react'
 import type { TextInputProps } from '@/types'
 import * as S from './TextInput.styles'
 
-export const TextInput = forwardRef<HTMLInputElement, Omit<TextInputProps, 'type'>>(
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       disabled,
@@ -17,6 +17,7 @@ export const TextInput = forwardRef<HTMLInputElement, Omit<TextInputProps, 'type
       required,
       size = 'medium',
       sx,
+      type = 'text',
       value = '',
     },
     ref
@@ -37,6 +38,7 @@ export const TextInput = forwardRef<HTMLInputElement, Omit<TextInputProps, 'type
             inputRef={ref}
             id={inputId}
             name={name}
+            type={type}
             value={value}
             placeholder={placeholder}
             onChange={onChange}

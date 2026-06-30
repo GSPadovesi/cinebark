@@ -1,67 +1,84 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom'
-import { HomePage, MoviePage, SessionPage, RoomPage } from '@/app/routes'
+import { Navigate, Outlet, createBrowserRouter } from 'react-router-dom'
+import { AuthPage, HomePage, MoviePage, SessionPage, RoomPage } from '@/app/routes'
 import { AppLayout } from '@/components'
 
 export const appRoutes = {
+  auth: '/login',
   home: '/',
   movies: '/filmes',
   sessions: '/sessoes',
   rooms: '/salas',
-  teste: '/filmes/teste'
 } as const
+
+const ProtectedRoute = () => {
+  const token = cookieStore.get("token");
+
+  if (!token) return <Navigate to="/login" replace />
+
+  return <Outlet />
+}
 
 export const router = createBrowserRouter([
   {
-    path: appRoutes.home,
+    path: appRoutes.auth,
     element: <AppLayout />,
     children: [
       {
         index: true,
-        element: <HomePage />,
-      },
-      {
-        path: '*',
-        element: <Navigate to={appRoutes.home} replace />,
+        element: <AuthPage />
       },
     ],
   },
   {
-    path: appRoutes.movies,
-    element: <AppLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <MoviePage />
-      },
-    ],
-  },
-  {
-    path: appRoutes.sessions,
-    element: <AppLayout />,
-    children: [
-      {
-        index: true,
-        element: <SessionPage />
-      },
-    ],
-  },
-  {
-    path: appRoutes.rooms,
-    element: <AppLayout />,
-    children: [
-      {
-        index: true,
-        element: <RoomPage />
-      },
-    ],
-  },
-  {
-    path: appRoutes.teste,
-    element: <AppLayout />,
-    children: [
-      {
-        index: true,
-        element: <h1>Olá, mundo</h1>
+        element: <AppLayout />,
+        children: [
+          {
+            path: appRoutes.home,
+            children: [
+              {
+                index: true,
+                element: <HomePage />,
+              },
+              {
+                path: '*',
+                element: <Navigate to={appRoutes.home} replace />,
+              },
+            ]
+          },
+          {
+            path: appRoutes.movies,
+            element: <AppLayout />,
+            children: [
+              {
+                index: true,
+                element: <MoviePage />
+              },
+            ],
+          },
+          {
+            path: appRoutes.sessions,
+            element: <AppLayout />,
+            children: [
+              {
+                index: true,
+                element: <SessionPage />
+              },
+            ],
+          },
+          {
+            path: appRoutes.rooms,
+            element: <AppLayout />,
+            children: [
+              {
+                index: true,
+                element: <RoomPage />
+              },
+            ],
+          }
+        ]
       }
     ]
   }

@@ -1,2 +1,2 @@
 org.springframework.boot.EnvironmentPostProcessor=\
-com.cinaberk_api.config.DotenvEnvironmentPostProcessor
+com.cinaberk_api.infrastructure.config.DotenvEnvironmentPostProcessor
