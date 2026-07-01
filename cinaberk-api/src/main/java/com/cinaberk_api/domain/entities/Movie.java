@@ -105,10 +105,6 @@ public class Movie {
             setMinimumAge(minimumAge);
         }
 
-        if (posterURL != null) {
-            setPosterURL(posterURL);
-        }
-
         if (availableAt != null) {
             setAvailableAt(availableAt);
         }
@@ -120,10 +116,6 @@ public class Movie {
 
     public void activate() {
         this.active = true;
-    }
-
-    public void changePosterURL(String posterURL){
-        this.setPosterURL(posterURL);
     }
 
     private void setTitle(String title) {
@@ -142,7 +134,7 @@ public class Movie {
     }
 
     private void setGenres(List<GenreType> genres) {
-        if (genres == null || genres.isEmpty() || genres.contains(null)) {
+        if (genres == null || genres.isEmpty() ||  genres.stream().anyMatch(genre -> genre == null)) {
             throw new IllegalArgumentException("Generos invalidos");
         }
 

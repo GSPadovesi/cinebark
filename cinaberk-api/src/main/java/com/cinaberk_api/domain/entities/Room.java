@@ -1,9 +1,12 @@
 package com.cinaberk_api.domain.entities;
 
+import com.cinaberk_api.domain.enums.GenreType;
 import com.cinaberk_api.domain.enums.ResourceType;
 import com.cinaberk_api.domain.enums.RoomType;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,7 +20,7 @@ public class Room {
     private String posterURL;
     private boolean active;
 
-    public Room(
+    private Room(
             UUID id,
             Integer number,
             Integer capacity,
@@ -48,13 +51,25 @@ public class Room {
         return new Room(null, number, capacity, roomType, description, resources, posterURL, true);
     }
 
-    public void update(
+    public static Room restore(
+            UUID id,
             Integer number,
             Integer capacity,
             RoomType roomType,
             String description,
             Set<ResourceType> resources,
-            String posterURL
+            String posterURL,
+            Boolean active
+    ) {
+        return new Room(id, number, capacity, roomType, description, resources, posterURL, active);
+    }
+
+    public void update(
+            Integer number,
+            Integer capacity,
+            RoomType roomType,
+            String description,
+            Set<ResourceType> resources
     ) {
         if (number != null) {
             setNumber(number);
@@ -74,10 +89,6 @@ public class Room {
 
         if (resources != null) {
             setResources(resources);
-        }
-
-        if (posterURL != null) {
-            setPosterURL(posterURL);
         }
     }
 
@@ -108,6 +119,11 @@ public class Room {
     public void activate() {
         this.active = true;
     }
+
+    public void changePosterURL(String posterURL){
+        this.setPosterURL(posterURL);
+    }
+
 
     private void ensureActive() {
         if (!active) {

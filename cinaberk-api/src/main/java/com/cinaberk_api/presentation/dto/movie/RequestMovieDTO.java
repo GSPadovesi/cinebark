@@ -11,20 +11,20 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record CreateMovieDTO(
-        @NotBlank(message = "O titulo e obrigatorio")
+public record RequestMovieDTO(
+//        @NotBlank(message = "O titulo e obrigatorio")
         String title,
 
-        @NotBlank(message = "A descricao e obrigatoria")
+//        @NotBlank(message = "A descricao e obrigatoria")
         String description,
 
-        @NotBlank(message = "A sinopse e obrigatoria")
+//        @NotBlank(message = "A sinopse e obrigatoria")
         String synopsis,
 
-        @NotEmpty(message = "Informe pelo menos um genero")
+//        @NotEmpty(message = "Informe pelo menos um genero")
         List<@NotNull(message = "Genero invalido") GenreType> genres,
 
-        @NotNull(message = "A duracao e obrigatoria")
+//        @NotNull(message = "A duracao e obrigatoria")
         @Positive(message = "A duracao deve ser maior que zero")
         Integer durationInMinutos,
 
@@ -32,8 +32,8 @@ public record CreateMovieDTO(
         @PositiveOrZero(message = "A idade minima nao pode ser negativa")
         Integer minimumAge,
 
-        @NotNull(message = "A data de disponibilidade e obrigatoria")
-        @FutureOrPresent(message = "A data de disponibilidade nao pode estar no passado")
+//        @NotNull(message = "A data de disponibilidade e obrigatoria")
+//        @FutureOrPresent(message = "A data de disponibilidade nao pode estar no passado")
         LocalDateTime availableAt
 ) {
 }
