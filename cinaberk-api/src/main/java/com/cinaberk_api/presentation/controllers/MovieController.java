@@ -62,7 +62,7 @@ public class MovieController {
             @PageableDefault(page = 0, size = 10) Pageable pageable
     ){
 
-        SearchMoviesCommand querys = new SearchMoviesCommand(
+        SearchMoviesCommand query = new SearchMoviesCommand(
                 search,
                 genre,
                 minimunAge,
@@ -70,18 +70,18 @@ public class MovieController {
                 pageable.getPageNumber(),
                 pageable.getPageSize()
         );
-        return ResponseEntity.status(HttpStatus.OK).body(findAllMovieUseCase.execute(querys).stream().map(ResponseMovieDTO::new).toList());
+        return ResponseEntity.status(HttpStatus.OK).body(findAllMovieUseCase.execute(query).stream().map(ResponseMovieDTO::new).toList());
+    }
+
+    @GetMapping("/home")
+    ResponseEntity<List<ResponseMovieDTO>> findHomeMovies(){
+        return ResponseEntity.status(HttpStatus.OK).body(findHomeMoviesUseCase.execute().stream().map(ResponseMovieDTO::new).toList());
     }
 
     @GetMapping("/{id}")
     ResponseEntity<ResponseMovieDTO> findMovieById(@PathVariable UUID id){
         Movie movie = findMovieByIdUseCase.execute(id);
         return ResponseEntity.status(HttpStatus.OK).body(new ResponseMovieDTO(movie));
-    }
-
-    @GetMapping("/home")
-    ResponseEntity<List<ResponseMovieDTO>> findHomeMovies(){
-        return ResponseEntity.status(HttpStatus.OK).body(findHomeMoviesUseCase.execute().stream().map(ResponseMovieDTO::new).toList());
     }
 
     @PostMapping
